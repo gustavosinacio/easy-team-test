@@ -3,12 +3,14 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  OneToMany,
   //OneToMany,
 } from 'typeorm';
 
 import { Location } from '../location/location.entity';
+import { TimeTracking } from 'src/time-tracking/time-tracking.entity';
 
-@Entity()
+@Entity('employees')
 export class Employee {
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,6 +24,6 @@ export class Employee {
   @Column()
   picture: string;
 
-  //@OneToMany(() => TimeTracking, (timeTracking) => timeTracking.employee)
-  //timeTrackings: TimeTracking[];
+  @OneToMany(() => TimeTracking, (timeTracking) => timeTracking.employee)
+  timeTrackings: TimeTracking[];
 }

@@ -1,17 +1,27 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 
-@Entity()
+import { Employee } from 'src/employee/employee.entity';
+
+@Entity('time-trackings')
 export class TimeTracking {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @ManyToOne(() => Employee, (employee) => employee.timeTrackings)
-  // @JoinColumn({ name: 'employeeId' })
-  // employee: Employee;
+  @Column()
+  clockIn: Date;
 
   @Column()
-  clockIn: string;
+  clockOut: Date;
 
-  @Column()
-  clockOut: string;
+  @ManyToOne(() => Employee, (employee) => employee.timeTrackings, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'employee_id' })
+  employee: Employee;
 }

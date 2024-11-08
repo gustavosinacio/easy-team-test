@@ -16,17 +16,18 @@ export class UserService {
     username: string,
     password: string,
     role: UserRole,
+    employeeId: number,
   ): Promise<User> {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const user = this.userRepository.create({
+    const newUser = this.userRepository.create({
       username,
       password: hashedPassword,
       role,
+      employee: { id: employeeId },
     });
-
-    return this.userRepository.save(user);
+    return await this.userRepository.save(newUser);
   }
 
   async findByUsername(username: string): Promise<User> {

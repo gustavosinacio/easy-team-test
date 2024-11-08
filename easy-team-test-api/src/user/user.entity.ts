@@ -1,13 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
 
 import { UserRole } from './enums';
+import { Employee } from 'src/employee/employee.entity';
 
-@Entity()
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -19,4 +26,8 @@ export class User {
     default: UserRole.REGULAR,
   })
   role: UserRole;
+
+  @OneToOne(() => Employee, { eager: true })
+  @JoinColumn()
+  employee: Employee;
 }

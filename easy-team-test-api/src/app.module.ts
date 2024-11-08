@@ -1,21 +1,19 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 import { EmployeeModule } from './employee/employee.module';
-import { Employee } from './employee/employee.entity';
 import { LocationModule } from './location/location.module';
-import { Location } from './location/location.entity';
-//import { TimeTrackingModule } from './time-tracking/time-tracking.module';
+import { UserModule } from './user/user.module';
+import { TimeTrackingModule } from './time-tracking/time-tracking.module';
 
-console.log('Database Config:', {
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  username: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-});
+const IS_DEV = process.env.NODE_ENV !== 'PRODUCTION';
+
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -24,12 +22,12 @@ console.log('Database Config:', {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: process.env.ENV !== 'PRODUCTION',
+      synchronize: IS_DEV,
     }),
-
-    TypeOrmModule.forFeature([Location, Employee]),
     EmployeeModule,
     LocationModule,
+    UserModule,
+    TimeTrackingModule,
   ],
 })
 export class AppModule {}
