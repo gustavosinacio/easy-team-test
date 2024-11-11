@@ -15,7 +15,7 @@ export class LocationService {
     return this.locationRepository.find({ relations: ['employees'] });
   }
 
-  async findOne(id: number): Promise<Location> {
+  async findOne(id: string): Promise<Location> {
     return this.locationRepository.findOne({
       where: { id },
       relations: ['employees'],

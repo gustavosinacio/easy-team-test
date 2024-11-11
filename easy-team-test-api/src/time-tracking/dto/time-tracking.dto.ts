@@ -1,5 +1,5 @@
 export class CreateTimeTrackingDto {
-  employee_id: number;
+  employee_id: string;
   clockIn: Date;
   clockOut: Date;
 }

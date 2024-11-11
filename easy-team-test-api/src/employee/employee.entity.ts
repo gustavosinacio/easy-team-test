@@ -4,16 +4,15 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-  //OneToMany,
 } from 'typeorm';
 
 import { Location } from '../location/location.entity';
-import { TimeTracking } from 'src/time-tracking/time-tracking.entity';
+import { TimeTracking } from '../time-tracking/time-tracking.entity';
 
 @Entity('employees')
 export class Employee {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @ManyToOne(() => Location, (location) => location.employees)
   location: Location;

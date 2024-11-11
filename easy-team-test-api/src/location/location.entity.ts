@@ -3,8 +3,8 @@ import { Employee } from '../employee/employee.entity';
 
 @Entity('locations')
 export class Location {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;

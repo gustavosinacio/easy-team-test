@@ -7,12 +7,12 @@ import {
 } from 'typeorm';
 
 import { UserRole } from './enums';
-import { Employee } from 'src/employee/employee.entity';
+import { Employee } from '../employee/employee.entity';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ unique: true })
   username: string;

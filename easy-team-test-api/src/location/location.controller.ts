@@ -13,7 +13,7 @@ export class LocationController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Location> {
+  async findOne(@Param('id') id: string): Promise<Location> {
     return this.locationService.findOne(id);
   }
 }

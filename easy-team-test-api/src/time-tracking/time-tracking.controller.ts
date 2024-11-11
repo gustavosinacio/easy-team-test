@@ -17,7 +17,7 @@ export class TimeTrackingController {
   }
 
   @Get('/employee/:employeeId')
-  async getTrackingsByEmployee(@Param('employeeId') employeeId: number) {
+  async getTrackingsByEmployee(@Param('employeeId') employeeId: string) {
     return this.timeTrackingService.getTrackingsByEmployee(employeeId);
   }
 }

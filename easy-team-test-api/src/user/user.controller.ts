@@ -12,7 +12,7 @@ export class UserController {
     @Body('username') username: string,
     @Body('password') password: string,
     @Body('role') role: UserRole,
-    @Body('employeeId') employeeId: number,
+    @Body('employeeId') employeeId: string,
   ) {
     return this.userService.createUser(username, password, role, employeeId);
   }

@@ -6,12 +6,12 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import { Employee } from 'src/employee/employee.entity';
+import { Employee } from '../employee/employee.entity';
 
 @Entity('time-trackings')
 export class TimeTracking {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   clockIn: Date;

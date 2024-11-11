@@ -15,7 +15,7 @@ export class TimeTrackingService {
   ) {}
 
   async createTracking(
-    employee_id: number,
+    employee_id: string,
     clockIn: Date,
     clockOut: Date,
   ): Promise<TimeTracking> {
@@ -26,7 +26,6 @@ export class TimeTrackingService {
       throw new NotFoundException(`Employee with ID ${employee_id} not found`);
     }
 
-    console.log(9821, clockIn, clockOut);
     const newTimeTracking = this.timeTrackingRepository.create({
       clockIn,
       clockOut,
@@ -36,7 +35,7 @@ export class TimeTrackingService {
     return this.timeTrackingRepository.save(newTimeTracking);
   }
 
-  async getTrackingsByEmployee(employeeId: number): Promise<TimeTracking[]> {
+  async getTrackingsByEmployee(employeeId: string): Promise<TimeTracking[]> {
     return this.timeTrackingRepository.find({
       where: { employee: { id: employeeId } },
     });

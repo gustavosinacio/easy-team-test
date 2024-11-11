@@ -12,7 +12,7 @@ export class EmployeeController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Employee> {
+  async findOne(@Param('id') id: string): Promise<Employee> {
     return this.employeeService.findOne(id);
   }
 }

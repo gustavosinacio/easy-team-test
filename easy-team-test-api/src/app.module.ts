@@ -6,6 +6,7 @@ import { EmployeeModule } from './employee/employee.module';
 import { LocationModule } from './location/location.module';
 import { UserModule } from './user/user.module';
 import { TimeTrackingModule } from './time-tracking/time-tracking.module';
+import { AuthModule } from './auth/auth.module';
 
 const IS_DEV = process.env.NODE_ENV !== 'PRODUCTION';
 
@@ -28,6 +29,7 @@ const IS_DEV = process.env.NODE_ENV !== 'PRODUCTION';
     LocationModule,
     UserModule,
     TimeTrackingModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
