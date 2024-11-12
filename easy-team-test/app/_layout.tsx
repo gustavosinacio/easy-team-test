@@ -19,9 +19,7 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
-  const { token, role } = useLogin("jamessmith", "securePassword123");
-  // const { token, role } = useLogin("charlibrown", "securePassword123");
-  const { employees } = useHydrateApp();
+  const { token, role, employees } = useHydrateApp();
 
   useEffect(() => {
     if (loaded) {
