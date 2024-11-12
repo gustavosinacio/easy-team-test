@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export function useLogin(username: string, password: string) {
   const [token, setToken] = useState<string | null>(null);
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState<"admin" | "regular">("regular");
   const [isLoadingToken, setIsLoadingToken] = useState(true);
 
   useEffect(() => {

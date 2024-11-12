@@ -51,14 +51,10 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    // TODO fix this payload to use real user data
     const payload: JWTSignPayload = {
       employeeId: `${user.employee.id}`,
-      locationId: 'locId',
-      organizationId: 'orgId',
-      payrollId: 'payId',
-      employerPayrollId: 'emplId',
-      accessRoleName: user.role,
+      locationId: user.employee.location.id,
+      accessRole: user.role,
     };
 
     const token = await this.signJwt(payload);
@@ -66,19 +62,17 @@ export class AuthService {
     return { access_token: token };
   }
 
-  async signJwt({ accessRoleName, ...payload }: JWTSignPayload) {
-    // TODO this should be fixed to use real user data on permissions
+  async signJwt(payload: JWTSignPayload) {
+    const adminPermissions = [];
+    if (payload.accessRole === 'admin') {
+      adminPermissions.push('SHIFT_WRITE', 'SHIFT_ADD');
+    }
     const signablePayload = {
       ...payload,
       partnerId: process.env.EASY_TEAM_PARTNER_ID,
       accessRole: {
-        name: accessRoleName,
-        permissions: [
-          'LOCATION_READ',
-          'SHIFT_READ',
-          'SHIFT_WRITE',
-          'SHIFT_ADD',
-        ],
+        name: payload.accessRole,
+        permissions: ['LOCATION_READ', 'SHIFT_READ', ...adminPermissions],
       },
       role: {
         name: '<EMPLOYEE ROLE in store: Cashier/Assistant/Manager...>',

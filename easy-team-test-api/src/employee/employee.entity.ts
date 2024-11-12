@@ -14,7 +14,7 @@ export class Employee {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Location, (location) => location.employees)
+  @ManyToOne(() => Location, (location) => location.employees, { eager: true })
   location: Location;
 
   @Column()

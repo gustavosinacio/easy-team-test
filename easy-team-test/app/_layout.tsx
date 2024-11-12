@@ -20,6 +20,7 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
   const { token, role } = useLogin("jamessmith", "securePassword123");
+  // const { token, role } = useLogin("charlibrown", "securePassword123");
   const { employees } = useHydrateApp();
 
   useEffect(() => {

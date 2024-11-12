@@ -1,17 +1,17 @@
 import { Tabs } from "expo-router";
-import React from "react";
+import React, { useContext } from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { UserContext } from "@/contexts/User/UserContext";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { role } = useContext(UserContext);
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: Colors["dark"].tint,
         headerShown: false,
       }}
     >
@@ -31,7 +31,23 @@ export default function TabLayout() {
         name="timesheet"
         options={{
           title: "Timesheet",
-          tabBarIcon: ({ color }) => <TabBarIcon name={"time"} color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="time" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
+          href: role === "admin" ? "/(tabs)/settings" : null,
+        }}
+      />
+      <Tabs.Screen
+        name="employees"
+        options={{
+          title: "Employees",
+          tabBarIcon: ({ color }) => <TabBarIcon name="people" color={color} />,
+          href: role === "admin" ? "/(tabs)/employees" : null,
         }}
       />
     </Tabs>
