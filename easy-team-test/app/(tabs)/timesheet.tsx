@@ -1,5 +1,10 @@
+import SafeView from "@/components/SafeView";
 import { Timesheet } from "@easyteam/ui";
 
 export default function HomeScreen() {
-  return <Timesheet onEvent={console.log} />;
+  return (
+    <SafeView>
+      <Timesheet onEvent={console.log} />
+    </SafeView>
+  );
 }

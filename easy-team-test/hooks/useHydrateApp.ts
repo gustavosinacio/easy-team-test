@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 import { Employee } from "@/types/employees.types";
-import { getEmployees } from "@/services/employees.service";
+import { getLocationEmployees } from "@/services/locations.service";
 import { getAuthToken } from "@/services/auth.service";
 import API from "@/services/api";
 
@@ -28,10 +28,10 @@ export function useHydrateApp() {
       if (jwt) {
         const decoded = jwtDecode<any>(jwt);
         setRole(decoded.accessRole.name);
-      }
 
-      const employees = await getEmployees();
-      setEmployees(employees);
+        const employees = await getLocationEmployees(decoded.locationId);
+        setEmployees(employees);
+      }
     }
 
     hydrate();

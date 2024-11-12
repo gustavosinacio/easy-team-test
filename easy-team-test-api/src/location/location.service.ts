@@ -16,9 +16,11 @@ export class LocationService {
   }
 
   async findOne(id: string): Promise<Location> {
-    return this.locationRepository.findOne({
-      where: { id },
-      relations: ['employees'],
-    });
+    return this.locationRepository
+      .createQueryBuilder('location')
+      .leftJoinAndSelect('location.employees', 'employee')
+      .select(['location.id', 'location.name', 'employee.id', 'employee.name'])
+      .where('location.id = :id', { id })
+      .getOne();
   }
 }
