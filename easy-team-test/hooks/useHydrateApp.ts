@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 import { Employee } from "@/types/employees.types";
-import { getLocationEmployees } from "@/services/locations.service";
+import { getLocationData } from "@/services/locations.service";
 import { getAuthToken } from "@/services/auth.service";
 import API from "@/services/api";
 
@@ -19,6 +19,9 @@ export function useHydrateApp() {
   const [employees, setEmployees] = useState<Employee[]>();
   const [token, setToken] = useState<string | null>(null);
   const [role, setRole] = useState<"admin" | "regular">("regular");
+  const [locationId, setLocationId] = useState("");
+  const [isGlobalTimeTrackingEnabled, setIsGlobalTimeTrackingEnabled] =
+    useState(false);
 
   useEffect(() => {
     async function hydrate() {
@@ -29,13 +32,17 @@ export function useHydrateApp() {
         const decoded = jwtDecode<any>(jwt);
         setRole(decoded.accessRole.name);
 
-        const employees = await getLocationEmployees(decoded.locationId);
+        const { employees, isGlobalTrackingEnabled } = await getLocationData(
+          decoded.locationId
+        );
         setEmployees(employees);
+        setIsGlobalTimeTrackingEnabled(isGlobalTrackingEnabled);
+        setLocationId(decoded.locationId);
       }
     }
 
     hydrate();
   }, []);
 
-  return { token, role, employees };
+  return { token, role, locationId, employees, isGlobalTimeTrackingEnabled };
 }

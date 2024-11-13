@@ -1,7 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 
 import { LocationService } from './location.service';
 import { Location } from './location.entity';
+import { UpdateLocationSettingsDto } from './dto/update-location-settings.dto';
 
 @Controller('locations')
 export class LocationController {
@@ -15,5 +16,13 @@ export class LocationController {
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Location> {
     return this.locationService.findOne(id);
+  }
+
+  @Patch(':id/settings')
+  async updateLocationSettings(
+    @Param('id') id: string,
+    @Body() updateDto: UpdateLocationSettingsDto,
+  ) {
+    return this.locationService.updateLocationSettings(id, updateDto);
   }
 }

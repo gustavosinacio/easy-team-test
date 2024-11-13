@@ -23,6 +23,11 @@ export class Employee {
   @Column()
   picture: string;
 
-  @OneToMany(() => TimeTracking, (timeTracking) => timeTracking.employee)
+  @Column({ default: true })
+  timeTrackingEnabled: boolean;
+
+  @OneToMany(() => TimeTracking, (timeTracking) => timeTracking.employee, {
+    eager: true,
+  })
   timeTrackings: TimeTracking[];
 }

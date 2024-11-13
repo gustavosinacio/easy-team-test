@@ -12,6 +12,9 @@ export class Location {
   @Column()
   address: string;
 
+  @Column({ default: true })
+  isGlobalTrackingEnabled: boolean;
+
   @OneToMany(() => Employee, (employee) => employee.location)
   employees: Employee[];
 }

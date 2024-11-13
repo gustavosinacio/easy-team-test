@@ -3,10 +3,10 @@ import React, { useContext } from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
-import { UserContext } from "@/contexts/User/UserContext";
+import { AppContext } from "@/contexts/App/AppContext";
 
 export default function TabLayout() {
-  const { role } = useContext(UserContext);
+  const { role } = useContext(AppContext);
 
   return (
     <Tabs
@@ -35,19 +35,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
-          href: role === "admin" ? "/(tabs)/settings" : null,
-        }}
-      />
-      <Tabs.Screen
         name="employees"
         options={{
           title: "Employees",
           tabBarIcon: ({ color }) => <TabBarIcon name="people" color={color} />,
           href: role === "admin" ? "/(tabs)/employees" : null,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
+          href: role === "admin" ? "/(tabs)/settings" : null,
         }}
       />
     </Tabs>

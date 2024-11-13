@@ -65,7 +65,7 @@ export class AuthService {
   async signJwt(payload: JWTSignPayload) {
     const adminPermissions = [];
     if (payload.accessRole === 'admin') {
-      adminPermissions.push('SHIFT_WRITE', 'SHIFT_ADD');
+      adminPermissions.push('SHIFT_WRITE', 'SHIFT_ADD', 'LOCATION_ADMIN');
     }
     const signablePayload = {
       ...payload,
