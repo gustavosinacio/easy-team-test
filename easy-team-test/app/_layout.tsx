@@ -11,6 +11,7 @@ import { EasyTeamProvider } from "@easyteam/ui";
 
 import { useHydrateApp } from "@/hooks/useHydrateApp";
 import { AppContext } from "@/contexts/App/AppContext";
+import { Colors } from "@/constants/Colors";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,9 +48,23 @@ export default function RootLayout() {
         isGlobalTimeTrackingEnabled={isGlobalTimeTrackingEnabled}
       >
         <AppContext.Provider value={{ token, role, locationId, employeeId }}>
-          <Stack>
+          <Stack
+            screenOptions={{
+              headerTintColor: Colors.dark.tint,
+              headerBackTitle: "Back",
+            }}
+          >
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
+            <Stack.Screen
+              name="employee/[employeeId]"
+              options={{ headerTitle: "Timesheet" }}
+            />
+            <Stack.Screen
+              name="employee/shift/[employeeId]"
+              options={{
+                headerTitle: "Shift Form",
+              }}
+            />
           </Stack>
         </AppContext.Provider>
       </EasyTeamProvider>

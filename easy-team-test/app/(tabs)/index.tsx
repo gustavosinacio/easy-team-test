@@ -6,7 +6,7 @@ import { postClockInOut } from "@/services/employee.service";
 import { AppContext } from "@/contexts/App/AppContext";
 import SafeView from "@/components/SafeView";
 
-export default function HomeScreen() {
+export default function ClockInScreen() {
   const { employeeId } = useContext(AppContext);
 
   const handleClockInOut = useCallback(

@@ -13,3 +13,7 @@ export type EventClockInOut = {
   event_type: "onClockIn" | "onClockOut";
   timestamp: string;
 };
+
+export type EmployeeNavigationData = {
+  employeeId: string;
+};

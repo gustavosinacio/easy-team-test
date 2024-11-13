@@ -1,6 +1,5 @@
+import { Colors } from "@/constants/Colors";
 import { SafeAreaView, StyleSheet } from "react-native";
-
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 type SafeViewProps = {
   children: React.ReactNode | React.ReactNode[];
