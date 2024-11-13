@@ -100,6 +100,17 @@ npm run ios
 environment, the React Native application was developed and tested **ONLY** on iOS
 for now. To test the application as it was developed, please **use iOS**.
 
+### Application usage
+
+To speed up development of the test, no login functionality was created.
+To switch between users, access the file `hooks/useHydrateApp.ts`, comment the 
+username `jamessmith` and uncomment the username `charlibrown`.
+
+Regarding their roles:
+
+- `jamsessmith`: admin
+- `charlibrown`: regular
+
 ---
 
 <span style="color: cyan; font-size: 20px">**If there are any issues while running the applications, please contact me through my email**</span>
