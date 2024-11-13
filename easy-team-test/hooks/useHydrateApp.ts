@@ -20,6 +20,7 @@ export function useHydrateApp() {
   const [token, setToken] = useState<string | null>(null);
   const [role, setRole] = useState<"admin" | "regular">("regular");
   const [locationId, setLocationId] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
   const [isGlobalTimeTrackingEnabled, setIsGlobalTimeTrackingEnabled] =
     useState(false);
 
@@ -29,20 +30,27 @@ export function useHydrateApp() {
       API.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
       setToken(jwt);
       if (jwt) {
-        const decoded = jwtDecode<any>(jwt);
-        setRole(decoded.accessRole.name);
+        const { locationId, employeeId, accessRole } = jwtDecode<any>(jwt);
+        setRole(accessRole.name);
 
-        const { employees, isGlobalTrackingEnabled } = await getLocationData(
-          decoded.locationId
-        );
+        const { employees, isGlobalTrackingEnabled } =
+          await getLocationData(locationId);
         setEmployees(employees);
         setIsGlobalTimeTrackingEnabled(isGlobalTrackingEnabled);
-        setLocationId(decoded.locationId);
+        setLocationId(locationId);
+        setEmployeeId(employeeId);
       }
     }
 
     hydrate();
   }, []);
 
-  return { token, role, locationId, employees, isGlobalTimeTrackingEnabled };
+  return {
+    token,
+    role,
+    locationId,
+    employeeId,
+    employees,
+    isGlobalTimeTrackingEnabled,
+  };
 }

@@ -7,7 +7,7 @@ import { join } from 'path';
 
 import { User } from '../user/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { UserRole } from '../user/enums';
+import { USER_ROLE } from '../user/enums/userRole';
 import { JWTSignPayload } from './auth.types';
 
 @Injectable()
@@ -25,7 +25,7 @@ export class AuthService {
   async register(
     username: string,
     password: string,
-    role: UserRole = UserRole.REGULAR,
+    role: USER_ROLE = USER_ROLE.REGULAR,
   ) {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = this.userRepository.create({

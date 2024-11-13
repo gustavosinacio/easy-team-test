@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
-import { User } from "./AppContext.types";
+import { AppContextData } from "./AppContext.types";
 
-const AppContext = createContext<User>({} as User);
+const AppContext = createContext<AppContextData>({} as AppContextData);
 
 export { AppContext };

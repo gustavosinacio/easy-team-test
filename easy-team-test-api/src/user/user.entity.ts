@@ -6,7 +6,7 @@ import {
   OneToOne,
 } from 'typeorm';
 
-import { UserRole } from './enums';
+import { USER_ROLE } from './enums/userRole';
 import { Employee } from '../employee/employee.entity';
 
 @Entity('users')
@@ -22,10 +22,10 @@ export class User {
 
   @Column({
     type: 'enum',
-    enum: UserRole,
-    default: UserRole.REGULAR,
+    enum: USER_ROLE,
+    default: USER_ROLE.REGULAR,
   })
-  role: UserRole;
+  role: USER_ROLE;
 
   @OneToOne(() => Employee, { eager: true })
   @JoinColumn()

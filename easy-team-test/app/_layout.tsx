@@ -18,8 +18,14 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
-  const { token, role, employees, isGlobalTimeTrackingEnabled, locationId } =
-    useHydrateApp();
+  const {
+    token,
+    role,
+    employees,
+    isGlobalTimeTrackingEnabled,
+    locationId,
+    employeeId,
+  } = useHydrateApp();
 
   useEffect(() => {
     if (loaded) {
@@ -40,7 +46,7 @@ export default function RootLayout() {
         basePath="https://easyteam-dev-cbbeaxcbbkabh2g8.z03.azurefd.net/embed"
         isGlobalTimeTrackingEnabled={isGlobalTimeTrackingEnabled}
       >
-        <AppContext.Provider value={{ token, role, locationId }}>
+        <AppContext.Provider value={{ token, role, locationId, employeeId }}>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />

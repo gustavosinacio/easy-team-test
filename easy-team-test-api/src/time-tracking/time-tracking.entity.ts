@@ -7,17 +7,21 @@ import {
 } from 'typeorm';
 
 import { Employee } from '../employee/employee.entity';
+import { EVENT_TYPE } from './enums/eventType';
 
-@Entity('time-trackings')
+@Entity('time_trackings')
 export class TimeTracking {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  clockIn: Date;
+  @Column({ type: 'timestamp' })
+  timestamp: Date;
 
-  @Column()
-  clockOut: Date;
+  @Column({
+    type: 'enum',
+    enum: EVENT_TYPE,
+  })
+  type: EVENT_TYPE;
 
   @ManyToOne(() => Employee, (employee) => employee.timeTrackings, {
     nullable: false,

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 
 import { TimeTracking } from './time-tracking.entity';
 import { Employee } from '../employee/employee.entity';
+import { CreateTimeTrackingDto } from './dto/time-tracking.dto';
 
 @Injectable()
 export class TimeTrackingService {
@@ -14,25 +15,28 @@ export class TimeTrackingService {
     private readonly employeeRepository: Repository<Employee>,
   ) {}
 
-  async createTracking(
-    employee_id: string,
-    clockIn: Date,
-    clockOut: Date,
-  ): Promise<TimeTracking> {
+  async createTracking({
+    employeeId,
+    timestamp,
+    type,
+  }: CreateTimeTrackingDto): Promise<Partial<TimeTracking>> {
     const employee = await this.employeeRepository.findOne({
-      where: { id: employee_id },
+      where: { id: employeeId },
     });
     if (!employee) {
-      throw new NotFoundException(`Employee with ID ${employee_id} not found`);
+      throw new NotFoundException(`Employee with ID ${employeeId} not found`);
     }
 
     const newTimeTracking = this.timeTrackingRepository.create({
-      clockIn,
-      clockOut,
+      timestamp,
+      type,
       employee,
     });
 
-    return this.timeTrackingRepository.save(newTimeTracking);
+    const { id, timestamp: savedTimestamp } =
+      await this.timeTrackingRepository.save(newTimeTracking);
+
+    return { id, timestamp: savedTimestamp, type };
   }
 
   async getTrackingsByEmployee(employeeId: string): Promise<TimeTracking[]> {

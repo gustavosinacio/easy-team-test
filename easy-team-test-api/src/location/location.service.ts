@@ -52,8 +52,8 @@ export class LocationService {
         'employee.name',
         'employee.timeTrackingEnabled',
         'timeTracking.id',
-        'timeTracking.clockIn',
-        'timeTracking.clockOut',
+        'timeTracking.type',
+        'timeTracking.timestamp',
       ])
       .where('location.id = :id', { id })
       .getOne();

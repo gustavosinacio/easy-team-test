@@ -7,13 +7,8 @@ export class TimeTrackingController {
   constructor(private readonly timeTrackingService: TimeTrackingService) {}
 
   @Post()
-  async create(@Body() createTimeTrackingDto: CreateTimeTrackingDto) {
-    const { employee_id, clockIn, clockOut } = createTimeTrackingDto;
-    return this.timeTrackingService.createTracking(
-      employee_id,
-      clockIn,
-      clockOut,
-    );
+  async create(@Body() timeTrackingData: CreateTimeTrackingDto) {
+    return this.timeTrackingService.createTracking(timeTrackingData);
   }
 
   @Get('/employee/:employeeId')

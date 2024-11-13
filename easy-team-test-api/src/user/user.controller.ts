@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 import { UserService } from './user.service';
-import { UserRole } from './enums';
+import { USER_ROLE } from './enums/userRole';
 
 @Controller('users')
 export class UserController {
@@ -11,7 +11,7 @@ export class UserController {
   async createUser(
     @Body('username') username: string,
     @Body('password') password: string,
-    @Body('role') role: UserRole,
+    @Body('role') role: USER_ROLE,
     @Body('employeeId') employeeId: string,
   ) {
     return this.userService.createUser(username, password, role, employeeId);

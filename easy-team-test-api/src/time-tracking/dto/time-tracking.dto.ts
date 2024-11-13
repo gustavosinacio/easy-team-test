@@ -1,5 +1,7 @@
+import { EVENT_TYPE } from '../enums/eventType';
+
 export class CreateTimeTrackingDto {
-  employee_id: string;
-  clockIn: Date;
-  clockOut: Date;
+  employeeId: string;
+  timestamp: string;
+  type: EVENT_TYPE;
 }

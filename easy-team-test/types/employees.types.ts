@@ -8,3 +8,8 @@ export type Employee = {
   picture: string;
   timeTrackings: TimeTracking[];
 };
+
+export type EventClockInOut = {
+  event_type: "onClockIn" | "onClockOut";
+  timestamp: string;
+};
