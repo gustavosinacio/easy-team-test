@@ -99,3 +99,9 @@ npm run ios
 <span style="color: red">**IMPORTANT**</span>: Due to limitations in my development
 environment, the React Native application was developed and tested **ONLY** on iOS
 for now. To test the application as it was developed, please **use iOS**.
+
+---
+
+<span style="color: cyan; font-size: 20px">**If there are any issues while running the applications, please contact me through my email**</span>
+
+---
